@@ -1,0 +1,62 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" >
+    </Profile>
+
+  </Profiles>
+  <Settings>
+    <!--Email sending settings-->
+    <Setting Name="Email" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">email@acc.com</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">pass123</Value>
+    </Setting>
+    <Setting Name="EmailToSend" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">emailto@send.com</Value>
+    </Setting>
+
+    <!--Telegram sending settings-->
+    <Setting Name="TelegramAccount" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">380505005050</Value>
+    </Setting>
+    <Setting Name="TelegramApiId" Type="System.Int32" Scope="User" >
+      <Value Profile="(Default)">Id</Value>
+    </Setting>
+    <Setting Name="TelegramApiHash" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">hash</Value>
+    </Setting>
+    <Setting Name="TelegramToSend" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">@olehpad</Value>
+    </Setting>
+
+    <!--Instagram sending settings-->
+    <Setting Name="InstagramToSend" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">@someuser</Value>
+    </Setting>
+    <Setting Name="SessionId" Type="System.UInt64" Scope="User" >
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+
+    <!--Window Defaults-->
+    <Setting Name="Height" Type="System.Double" Scope="User" >
+      <Value Profile="(Default)"></Value>
+    </Setting>
+    <Setting Name="Width" Type="System.Double" Scope="User" >
+      <Value Profile="(Default)"></Value>
+    </Setting>
+    <Setting Name="Top" Type="System.Double" Scope="User" >
+      <Value Profile="(Default)"></Value>
+    </Setting>
+    <Setting Name="Left" Type="System.Double" Scope="User" >
+      <Value Profile="(Default)"></Value>
+    </Setting>
+    <Setting Name="WindowPosition" Type="System.Windows.WindowStartupLocation" Scope="User" >
+      <Value Profile="(Default)">Manual</Value>
+    </Setting>
+    <Setting Name="Test" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">test</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
