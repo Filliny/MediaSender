@@ -7,28 +7,21 @@ using MimeKit;
 
 namespace MediaSender.Senders
 {
-	class MailSender {
-
-		
+	class MailSender
+    {
+        private Settings Settings = Properties.Settings.Default;
 
 		public async void  MailSend(List<string> attachments)
 		{
 
 			var message = new MimeMessage();
-			message.From.Add(new MailboxAddress("Oleh", "olegf.droid@gmail.com"));
-			message.To.Add(new MailboxAddress("Oleg", "oleg@timtyler.org.ua"));
-			message.Subject = "How you doin'?";
+			message.From.Add(new MailboxAddress("MediaSender", Settings.Email));
+			message.To.Add(new MailboxAddress("User", Settings.EmailToSend));
+			message.Subject = "Message from media sender";
+            ;
 
 			var builder = new BodyBuilder();
-			builder.TextBody = @"Hey Alice,
-
-						What are you up to this weekend? Monica is throwing one of her parties on
-						Saturday and I was hoping you could make it.
-
-						Will you be my +1?
-
-						-- Joey
-						";
+			builder.TextBody = Settings.DefaultMessage;
 
 			// We may also want to attach a calendar event for Monica's party...
 
@@ -43,12 +36,12 @@ namespace MediaSender.Senders
 				// For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
 				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-				client.Connect("smtp.gmail.com", 465, true);
+				client.Connect(Settings.SmtpServer, Settings.SmtpPort,Settings.SSL);
 
 				// Note: only needed if the SMTP server requires authentication
                 try
                 {
-                    string passw = Settings.Default.Password;
+                    string passw = Settings.Password;
                     //new NetworkCredential("", Settings.Default.Password).Password;
 
 					client.Authenticate(Settings.Default.Email,  passw);

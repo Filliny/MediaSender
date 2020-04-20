@@ -62,7 +62,7 @@ namespace MediaSender.Senders
 
             if (user != null)
             {
-                await client.SendMessageAsync(new TLInputPeerUser() { UserId = user.Id, AccessHash = user.AccessHash.Value }, "Hello!");
+                await client.SendMessageAsync(new TLInputPeerUser() { UserId = user.Id, AccessHash = user.AccessHash.Value }, Settings.Default.DefaultMessage);
 
                 if (attachments.Count != 0)
                 {

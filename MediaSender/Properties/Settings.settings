@@ -16,6 +16,16 @@
     <Setting Name="EmailToSend" Type="System.String" Scope="User" >
       <Value Profile="(Default)">emailto@send.com</Value>
     </Setting>
+    <Setting Name="SmtpServer" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">smtp.google.com</Value>
+    </Setting>
+    <Setting Name="SmtpPort" Type="System.Int32" Scope="User" >
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="SSL" Type="System.Boolean" Scope="User" >
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+
 
     <!--Telegram sending settings-->
     <Setting Name="TelegramAccount" Type="System.String" Scope="User" >
@@ -39,6 +49,26 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
 
+    <!--App default settings-->
+    <Setting Name="DefaultFolder" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">C:\My Documents\Pictures</Value>
+    </Setting>
+    <Setting Name="ScanPeriodMin" Type="System.Int32" Scope="User" >
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ServerPort" Type="System.Int32" Scope="User" >
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+    <Setting Name="SubfoldersScan" Type="System.Boolean" Scope="User" >
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultMessage" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">Hello!</Value>
+    </Setting>
+    <Setting Name="FileFormats" Type="System.String" Scope="User" >
+      <Value Profile="(Default)">jpg,bmp,mp4</Value>
+    </Setting>
+    
     <!--Window Defaults-->
     <Setting Name="Height" Type="System.Double" Scope="User" >
       <Value Profile="(Default)"></Value>
@@ -55,8 +85,6 @@
     <Setting Name="WindowPosition" Type="System.Windows.WindowStartupLocation" Scope="User" >
       <Value Profile="(Default)">Manual</Value>
     </Setting>
-    <Setting Name="Test" Type="System.String" Scope="User" >
-      <Value Profile="(Default)">test</Value>
-    </Setting>
+
   </Settings>
 </SettingsFile>

@@ -6,20 +6,22 @@
     
     <Application.Resources>
 
-        <!--Check Boxes Style-->
+        <!--#region CheckBoxes Style-->
         <Style TargetType="CheckBox">
              <Setter Property="Margin" Value="0,3,0,2"></Setter>
          </Style>
+        <!--#endregion-->
 
-        <!--Loading Text Style-->
+        <!--#region Loading Text Style-->
         <Style x:Key="LoadingAny" TargetType="TextBlock">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Panel.ZIndex" Value="-1"/>
         </Style>
+        <!--#endregion-->
 
-        <!--Visual Focus Style-->
+    <!--#region Visual Focus Style-->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -29,8 +31,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
 
-        <!--Buttons Styles-->
+        <!--#region Buttons Styles-->
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
@@ -102,8 +105,9 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
 
-        <!--Text box styles-->
+        <!--#region TextBox styles-->
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="BurlyWood"/>
             <Setter Property="Margin" Value="1"></Setter>
@@ -111,11 +115,12 @@
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip"
                             Value="{Binding RelativeSource={RelativeSource Self},
-                    Path=(Validation.Errors)[0].ErrorContent}" />
+                        Path=(Validation.Errors)[0].ErrorContent}" />
                     <Setter Property="Foreground" Value="Red" />
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
 
         <Style x:Key="SettingsHeader" TargetType="TextBlock" >
             <Setter Property="Background" Value="Black" ></Setter>
@@ -124,16 +129,25 @@
             <Setter Property="TextAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0,0,0,5"></Setter>
         </Style>
+        <!--#endregion-->
 
-        <!--Application Settings panel animations-->
+        <!--#region TextBlock -->
+        <Style TargetType="TextBlock">
+            <!--<Setter Property="Margin" Value="0,3,0,0"></Setter>-->
+            
+        </Style>
+        <!--#endregion-->
+
+        <!--#region Application Settings panel animations-->
         <Storyboard x:Key="ShowSettingsPanel" >
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,-200" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,-250" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Key="HideSettingsPanel" >
-            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,0,0,-200" DecelerationRatio=".9" Duration="0:0:1" />
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,0,0,-250" DecelerationRatio=".9" Duration="0:0:1" />
         </Storyboard>
+        <!--#endregion-->
 
-        <!--Scanning Label Style-->
+        <!--#region Scanning Label Style-->
         <Style x:Key="ScanningLabel" TargetType="{x:Type TextBlock}">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Yellow"></Setter>
@@ -151,14 +165,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
 
-        <!--Validation Template-->
+        <!--#region Validation Template-->
         <ControlTemplate x:Key="validationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Yellow" FontSize="20">!</TextBlock>
                 <AdornedElementPlaceholder/>
             </DockPanel>
         </ControlTemplate>
+        <!--#endregion-->
 
     </Application.Resources>
 </Application>

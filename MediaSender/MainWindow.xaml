@@ -16,23 +16,27 @@
 
         ContentRendered="MainWindow_OnContentRendered" Icon="/Resources/checked.png"
         Closed="MainWindow_OnClosed">
-    <!--SizeToContent="Height"-->
+        <!-- SizeToContent="Height"-->
 
     <DockPanel MinHeight="250" MinWidth="780" >
         <Grid DockPanel.Dock="Bottom">
 
-            <!--Application Settings Panel-->
-            <DockPanel x:Name="AppSettings" VerticalAlignment="Bottom" Panel.ZIndex="2" DockPanel.Dock="Bottom" Height="200" MinHeight="100" MinWidth="780" Background="Brown" Margin="0,0,0,-200">
+            <!--#region Application Settings Panel-->
+            <DockPanel x:Name="AppSettings" VerticalAlignment="Bottom" Panel.ZIndex="2" DockPanel.Dock="Bottom" Height="250" MinHeight="100" MinWidth="780" Background="Brown" Margin="0,0,0,-250">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -46,60 +50,132 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
 
-                    <!--Email settings -->
+                    <!--#region Email settings -->
                     <TextBlock Grid.Column="1" Grid.Row="1" FontWeight="Bold" Style="{StaticResource SettingsHeader}" >Email Settings</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="2" FontWeight="Normal">Email Account:</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="4" FontWeight="Normal">Email Password:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="6" FontWeight="Normal">Default Email to Send:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" FontWeight="Normal">Smtp Server:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="8" FontWeight="Normal">Smtp Port:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="10" FontWeight="Normal">Default Email to Send:</TextBlock>
 
                     <TextBox x:Name="TextBoxEmailAcc" Grid.Column="1" Grid.Row="3"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=Email, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                     <PasswordBox x:Name="TextBoxEmailPassw"  Grid.Column="1" Grid.Row="5" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" />
                     <TextBox  Grid.Column="1" Grid.Row="5" x:Name="TextBoxShowPassw" Text="{Binding Password, Mode=TwoWay, ElementName=MyPasswordBox}" Visibility="Collapsed" />
                     <CheckBox  Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" x:Name="ShowPasswordCharsCheckBox" ToolTip="Show password" Checked="ShowPasswordCharsCheckBox_Checked" Unchecked="ShowPasswordCharsCheckBox_Unchecked" />
-                    <TextBox x:Name="TextBoxEmailSend" Grid.Column="1" Grid.Row="7"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
-                             Text="{Binding Source={x:Static p:Settings.Default}, Path=EmailToSend, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
-                    
+                    <TextBox x:Name="SmtpServer" Grid.Column="1" Grid.Row="7"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=SmtpServer, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                    
-                    <!--Telegram settings -->
+                    <TextBox x:Name="TextBoxEmailSend" Grid.Column="1" Grid.Row="11"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=EmailToSend, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+
+                    <Grid Grid.Column="1" Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="SmtpPort"  Grid.Column="0"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" 
+                                 Text="{Binding Source={x:Static p:Settings.Default}, Path=SmtpPort, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                        <CheckBox x:Name="SSL" Grid.Column="1" Grid.Row="9"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" Content="SSL"
+                                 IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=SSL, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Click="SSL_OnClick"/>
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Telegram settings -->
                     <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Style="{StaticResource SettingsHeader}">Telegram Settings</TextBlock>
                     <TextBlock Grid.Column="3" Grid.Row="2" FontWeight="Normal" Text="Your telegram phone:" />
                     <TextBlock Grid.Column="3" Grid.Row="4" FontWeight="Normal">ApiId</TextBlock>
                     <TextBlock Grid.Column="3" Grid.Row="6" FontWeight="Normal">ApiHash</TextBlock>
-                    <TextBlock Grid.Column="3" Grid.Row="8" FontWeight="Normal">Default id to send:</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="9" FontWeight="Normal">Default id to send:</TextBlock>
 
                     <TextBox x:Name="TextBoxTelegramPhone" Grid.Column="3" Grid.Row="3"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=TelegramAccount, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
 
                     <TextBox x:Name="TextBoxApiId"  Grid.Column="3" Grid.Row="5" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" 
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=TelegramApiId, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
-                    
-                    <TextBox x:Name="TextBoxApiHash" Grid.Column="3" Grid.Row="7"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+
+                    <TextBox x:Name="TextBoxApiHash" Grid.Column="3" Grid.Row="7" Grid.RowSpan="2" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" TextWrapping="Wrap"
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=TelegramApiHash, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                    <TextBox x:Name="TextBoxDefToSend" Grid.Column="3" Grid.Row="9"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+                    <TextBox x:Name="TextBoxDefToSend" Grid.Column="3" Grid.Row="10"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=TelegramToSend, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                    <!--#endregion-->
+
+                    <!--#region Instagram settings -->
+                    <TextBlock Grid.Column="5" Grid.Row="1"  FontWeight="Bold" Style="{StaticResource SettingsHeader}">Instagram Settings</TextBlock>
+                    <TextBlock Grid.Column="5" Grid.Row="2" FontWeight="Normal" Text="Your Instagram:" />
+                    <!--#endregion-->
+
+                    <!--#region Default message settings -->
+
+                    <TextBlock Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="1"  FontWeight="Bold" Style="{StaticResource SettingsHeader}">Default Message</TextBlock>
+                    <TextBox Name="Message" Grid.Column="7" Grid.Row="2" Grid.RowSpan="11" MinWidth="120" Margin="3" TextWrapping="Wrap"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultMessage, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                    <!--#endregion-->
+
+                    <!--#region General settings-->
+                    <Grid Grid.Column="9" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  FontWeight="Normal" Text="Folder to scan:" />
+                        <Button Grid.Column="1" Content="..." Margin="1" Click="ButtonFolder_OnClick"/>
+                    </Grid>
+
+                    <TextBlock Grid.Column="8" Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Style="{StaticResource SettingsHeader}">General Settings</TextBlock>
+                    
+                    
+                    <TextBlock Grid.Column="9" Grid.Row="6" FontWeight="Normal">File Formats:</TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="9" FontWeight="Normal" Visibility="Hidden">Default id to send:</TextBlock>
+
+                    <TextBox x:Name="DefaultFolder" Grid.Column="9" Grid.Row="3" Grid.RowSpan="2" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" TextWrapping="Wrap"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyDown="RescanBtn_OnClick"/>
+
+                    <CheckBox x:Name="SubfoldersScan"  Grid.Column="9" Grid.Row="5" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" Content="Scan subfolders" 
+                             IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=SubfoldersScan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} "/>
+
+                    <TextBox x:Name="FileFormats" Grid.Column="9" Grid.Row="7"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
+                             Text="{Binding Source={x:Static p:Settings.Default}, Path=FileFormats, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Margin="1,0,1,0" />
+
+                    <TextBox x:Name="Gen4" Grid.Column="9" Grid.Row="10"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" Visibility="Hidden"
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=TelegramToSend, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                    <!--Spacers-->
-                    <Rectangle Grid.Column="2" Grid.Row="2" Grid.RowSpan="9"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
-                    <Rectangle Grid.Column="4" Grid.Row="2" Grid.RowSpan="9"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+ 
+                    <Button Grid.Column="11" Grid.Row="4" Grid.RowSpan="5" MaxWidth="50" Click="SettingsSaveBtn_OnClick">Save</Button>
+                    <!--#endregion-->
 
-                    <Button Grid.Column="6" Grid.Row="1" Grid.RowSpan="5" Click="SettingsSaveBtn_OnClick">Save</Button>
-                    
+                    <!--#region Spacers-->
+                    <TextBlock Grid.Column="6" Grid.Row="1" Name="Dummy"  FontWeight="Bold" Style="{StaticResource SettingsHeader}"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="1"  Name="Dummy1"  FontWeight="Bold" Style="{StaticResource SettingsHeader}" ></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="1"  Name="Dummy2"  FontWeight="Bold" Style="{StaticResource SettingsHeader}" ></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="1"  Name="Dummy3"  FontWeight="Bold" Style="{StaticResource SettingsHeader}" ></TextBlock>
+
+
+                    <Rectangle Grid.Column="2" Grid.Row="2" Grid.RowSpan="11"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+                    <Rectangle Grid.Column="4" Grid.Row="2" Grid.RowSpan="11"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+                    <Rectangle Grid.Column="6" Grid.Row="2" Grid.RowSpan="11"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+                    <Rectangle Grid.Column="8" Grid.Row="2" Grid.RowSpan="11"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+                    <Rectangle Grid.Column="10" Grid.Row="2" Grid.RowSpan="11"  VerticalAlignment="Stretch" Width="1" Margin="5" Stroke="Black" />
+                    <!--#endregion-->
+
                 </Grid>
 
-                
+
             </DockPanel>
 
-            <!--Application Main Panel-->
+            <!--#endregion-->
+
+            <!--#region Application Main Panel Controls-->
             <DockPanel DockPanel.Dock="Bottom" Height="70" MinHeight="80" MinWidth="780"  Background="Brown" >
                 <StackPanel  Margin="10">
-                    <CheckBox x:Name="ToEMail" Click="ChannelSet"  Content="Send to Email"/>
+                    <CheckBox x:Name="ToEMail" Click="ChannelSet"  Content="Send to E-mail"/>
                     <CheckBox x:Name="ToTelegram"  Click="ChannelSet" Content="Send to Telegram"/>
                     <CheckBox x:Name="ToInstagram"  Click="ChannelSet" Content="Send to Instagram" />
                     <CheckBox x:Name="BoxesValidation" Visibility="Collapsed"></CheckBox>
@@ -142,16 +218,20 @@
                 </StackPanel>
 
                 <Button Name="SendBtn" Style="{StaticResource ValidatedButtn}" Margin="10" Width="100" HorizontalAlignment="Center" Click="ButtonSend_OnClick"  >Send</Button>
+               
+
                 <StackPanel HorizontalAlignment="Right" Orientation="Vertical"  Width="150" Margin="5"  >
                     <Button Name="SettingsBtn" Height="20" VerticalAlignment="Top" Click="SettingsBtn_OnClick">Settings</Button>
-                    <Button Name="SettingsBtn1" Height="20" Margin="0,5" VerticalAlignment="Center" >Button 2</Button>
-                    <Button Name="SettingsBtn2" Height="20" VerticalAlignment="Bottom">Button 3</Button>
+                    <Button Name="SettingsBtn1" Height="20" Margin="0,5" VerticalAlignment="Center" Click="RescanBtn_OnClick" >Rescan Folder</Button>
+                    <Button Name="SettingsBtn2" Height="20" VerticalAlignment="Bottom">Start Server</Button>
 
                 </StackPanel>
-                
+
             </DockPanel>
         </Grid>
+        <!--#endregion-->
 
+        <!--#region Content Panel-->
         <Grid DockPanel.Dock="Top" VerticalAlignment="Stretch" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width = "20"/>
@@ -177,5 +257,6 @@
                 </WrapPanel>
             </ScrollViewer>
         </Grid>
+        <!--#endregion-->
     </DockPanel>
 </Window>
