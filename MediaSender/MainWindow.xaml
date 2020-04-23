@@ -139,7 +139,7 @@
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyDown="RescanBtn_OnClick"/>
 
                     <CheckBox x:Name="SubfoldersScan"  Grid.Column="9" Grid.Row="5" Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top" Content="Scan subfolders" 
-                             IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=SubfoldersScan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} "/>
+                             IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=SubfoldersScan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBox x:Name="FileFormats" Grid.Column="9" Grid.Row="7"  Validation.ErrorTemplate="{StaticResource validationTemplate}"  DockPanel.Dock="Top"
                              Text="{Binding Source={x:Static p:Settings.Default}, Path=FileFormats, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Margin="1,0,1,0" />

@@ -1,33 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MediaSender.Helpers;
 using MediaSender.Properties;
 using MediaSender.Senders;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.WindowsAPICodePack.Shell;
-using Brush = System.Drawing.Brush;
-using Color = System.Drawing.Color;
 
 
 namespace MediaSender
@@ -43,7 +31,7 @@ namespace MediaSender
         private event RoutedEventHandler LScanningStart;
         private List<string> attachments = new List<string>();
         private List<string> showedFileList = new List<string>();
-        private CancellationTokenSource ScanPause; 
+        private CancellationTokenSource _scanPause; 
  
         public static bool IsChannelSet { get; set; } = false;
 
@@ -58,7 +46,7 @@ namespace MediaSender
 
         }
 
-        private void CheckFolder()
+        private void CheckFolder() //check directory exists
         {
             if (!Directory.Exists(Settings.Default.DefaultFolder))
             {
@@ -66,7 +54,8 @@ namespace MediaSender
             }
         }
 
-        private async void ShowScan()
+        
+        private async void ShowScan() //to fire scanning label
         {
             Scanning.IsEnabled = true;
             await Task.Delay(3000 );
@@ -81,23 +70,15 @@ namespace MediaSender
             List<string> extensions = new List<string>(Settings.Default.FileFormats.Split(","));
             SearchOption scansub = SearchOption.TopDirectoryOnly;
 
-            ScanPause = new CancellationTokenSource();
+            _scanPause = new CancellationTokenSource();
             
 
             while (true)
             {
                 ShowScan();
 
-                if (Settings.Default.SubfoldersScan == true)
-                {
-                    scansub = SearchOption.AllDirectories;
-                }
-                else
-                {
-                    scansub = SearchOption.TopDirectoryOnly;
-                }
-
-
+                scansub = Settings.Default.SubfoldersScan == true ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                
                 string[] LAllFiles = Directory.GetFiles(Settings.Default.DefaultFolder, "*", scansub);
 
 
@@ -163,7 +144,7 @@ namespace MediaSender
 
                 try
                 {
-                    await Task.Delay(60_000 * Settings.Default.ScanPeriodMin, ScanPause.Token);
+                    await Task.Delay(60_000 * Settings.Default.ScanPeriodMin, _scanPause.Token);
                    
                 }
                 catch (Exception e)
@@ -343,7 +324,7 @@ namespace MediaSender
             {
                 Settings.Default.DefaultFolder = dialog.SelectedPath;
                 showedFileList.Clear();
-                ScanPause.Cancel();
+                _scanPause.Cancel();
                 SearchFilesAsync();
             }
         }
@@ -351,7 +332,7 @@ namespace MediaSender
         private void RescanBtn_OnClick(object sender, RoutedEventArgs e)
         {
             showedFileList.Clear();
-            ScanPause.Cancel();
+            _scanPause.Cancel();
             SearchFilesAsync();
         }
     }
